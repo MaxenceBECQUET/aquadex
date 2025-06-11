@@ -13,7 +13,7 @@
   import { Textarea } from '$lib/components/ui/textarea';
   import { Modal } from '$lib/components/ui/modal';
   import { Carousel } from '$lib/components/ui/carousel';
-  import { Home, AlertTriangle, Trash2, ExternalLink } from 'lucide-svelte';
+  import { Home, AlertTriangle, Trash2, ExternalLink, Settings, Heart } from 'lucide-svelte'; // Added Settings, Heart
 
   let count = 0;
   const handleClick = () => {
@@ -67,10 +67,15 @@
       <Button href="https://example.com" target="_blank" variant="link">
         Simple Link <ExternalLink class="h-4 w-4 ml-1" />
       </Button>
+      <Button variant="outline">Outline Button</Button>
+      <Button variant="ghost">Ghost Button</Button>
     </div>
     <div class="flex flex-wrap gap-4 items-center">
       <Button variant="primary" disabled>Primary Disabled</Button>
       <Button variant="secondary" disabled>Secondary Disabled</Button>
+      <Button variant="danger" disabled>Danger Disabled</Button>
+      <Button variant="outline" disabled>Outline Disabled</Button>
+      <Button variant="ghost" disabled>Ghost Disabled</Button>
       <Button variant="danger" disabled>Danger Disabled</Button>
       <Button href="https://example.com" target="_blank" variant="primary" disabled>
         Link Disabled <ExternalLink class="h-4 w-4 ml-2" />
@@ -87,14 +92,20 @@
       <Button variant="icon" aria-label="Home">
         <Home class="h-5 w-5" />
       </Button>
+      <Button variant="icon" aria-label="Settings">
+        <Settings class="h-5 w-5" />
+      </Button>
       <Button variant="icon" aria-label="Warning" class="text-destructive hover:bg-destructive/10 focus:ring-destructive/50">
         <AlertTriangle class="h-5 w-5" />
       </Button>
-      <Button variant="icon" class="bg-primary text-primary-foreground p-2 rounded-md hover:bg-primary/80" aria-label="Delete">
+      <Button variant="icon" class="bg-primary text-primary-foreground hover:bg-primary/80" aria-label="Delete"> {/* Custom styling on icon button */}
         <Trash2 class="h-5 w-5" />
       </Button>
-        <Button variant="icon" aria-label="Home" disabled>
-        <Home class="h-5 w-5" />
+      <Button variant="icon" aria-label="Heart" disabled>
+        <Heart class="h-5 w-5" />
+      </Button>
+       <Button variant="outline" size="icon" aria-label="Heart Outline"> {/* Testing outline with icon content, size=icon is conceptual here, actual size is from variant=icon */}
+        <Heart class="h-5 w-5" />
       </Button>
     </div>
   </section>

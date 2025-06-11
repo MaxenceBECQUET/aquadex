@@ -1,9 +1,11 @@
 <script lang="ts">
   import { awardedBadges } from '$lib/stores/userProfileStore';
+  import { diveLogEntries } from '$lib/stores/diveLogStore'; // Import diveLogEntries
   import type { Badge } from '$lib/types/badges';
   import BadgeDisplay from '$lib/components/profile/BadgeDisplay.svelte';
-  import { allBadgeMetadata } from '$lib/data/badges'; // To show all available badges
-  import { Medal, ShieldOff } from 'lucide-svelte';
+  import { allBadgeMetadata } from '$lib/data/badges';
+  import { Medal, ShieldOff, BarChart3, Eye, Award, Microscope } from 'lucide-svelte'; // Added icons for stats, Added Microscope
+  import { Card, CardContent, CardHeader, CardTitle } from '$lib/components/ui/card'; // Import Card components
 
   let userBadges: Badge[] = [];
   awardedBadges.subscribe(value => {
@@ -22,6 +24,19 @@
       if (!a.achievedDate && b.achievedDate) return 1;
       return a.name.localeCompare(b.name);
   });
+
+  // Statistics
+  let totalObservations = 0;
+  let uniqueSpeciesObserved = 0;
+  let badgesObtained = 0;
+
+  $: {
+    totalObservations = $diveLogEntries.length;
+    const speciesIds = new Set($diveLogEntries.map(entry => entry.speciesId));
+    uniqueSpeciesObserved = speciesIds.size;
+    // badgesObtained is already reactive to $awardedBadges length via userBadges
+  }
+  $: badgesObtained = userBadges.length; // More direct way to get awarded badges count
 
   // For testing badge awarding logic - REMOVE IN PRODUCTION
   // import { diveLogEntries } from '$lib/stores/diveLogStore';
@@ -49,6 +64,39 @@
     <h1 class="text-3xl md:text-4xl font-bold text-foreground">My Profile</h1>
     <!-- <Button on:click={testAwardBadges}>Test Award Badges (Dev)</Button> -->
   </div>
+
+  <!-- Statistics Section -->
+  <section class="mb-12">
+    <h2 class="text-2xl font-semibold mb-6 text-primary flex items-center">
+      <BarChart3 class="h-7 w-7 mr-3" />
+      My Aquadex Stats
+    </h2>
+    <Card class="shadow-lg">
+      <CardContent class="p-6 space-y-0"> {/* Removed default space-y from CardContent if any, and default padding */}
+        <div class="flex justify-between items-center py-4 border-b border-border">
+          <div class="flex items-center">
+            <Eye class="h-5 w-5 mr-3 text-muted-foreground" />
+            <span class="text-muted-foreground">Total Dives Logged:</span>
+          </div>
+          <span class="font-bold text-xl text-primary">{totalObservations}</span>
+        </div>
+        <div class="flex justify-between items-center py-4 border-b border-border">
+          <div class="flex items-center">
+            <Microscope class="h-5 w-5 mr-3 text-muted-foreground" /> {/* Using Microscope icon from logbook page */}
+            <span class="text-muted-foreground">Unique Species Seen:</span>
+          </div>
+          <span class="font-bold text-xl text-primary">{uniqueSpeciesObserved}</span>
+        </div>
+        <div class="flex justify-between items-center py-4">
+          <div class="flex items-center">
+            <Award class="h-5 w-5 mr-3 text-muted-foreground" />
+            <span class="text-muted-foreground">Badges Earned:</span>
+          </div>
+          <span class="font-bold text-xl text-primary">{badgesObtained}</span>
+        </div>
+      </CardContent>
+    </Card>
+  </section>
 
   <section class="mb-12">
     <h2 class="text-2xl font-semibold text-primary mb-6 flex items-center">

@@ -8,6 +8,7 @@
     { href: "/library", label: "Library", icon: BookOpen },
     { href: "/logbook", label: "Logbook", icon: ClipboardList },
     { href: "/profile", label: "Profile", icon: User },
+    { href: "/settings", label: "Settings", icon: Settings }, // Added Settings to navLinks
   ];
 
   // Reactive variable to track current path for active link styling
@@ -29,6 +30,9 @@
     {/each}
   </div>
   <div class="absolute bottom-4 left-0 right-0 p-4">
+    <!-- Desktop settings link can remain separate if a different style is desired, -->
+    <!-- or it could be removed if `navLinks` now covers it satisfactorily. -->
+    <!-- For now, let's keep it to maintain the existing distinct desktop style. -->
      <a
         href="/settings"
         class="flex items-center space-x-3 px-3 py-2 rounded-md text-lg hover:bg-muted/50 transition-colors {currentPath === '/settings' ? 'bg-primary/10 text-primary font-semibold' : 'text-foreground/70 hover:text-foreground'}"
@@ -40,6 +44,7 @@
 </nav>
 
 <!-- Mobile Navigation (Bottom Bar) -->
+<!-- Now iterates over navLinks which includes Settings -->
 <nav class="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-muted/75 backdrop-blur-md border-t border-border/50 shadow-lg z-10">
   <div class="flex justify-around items-center h-full">
     {#each navLinks as link}
