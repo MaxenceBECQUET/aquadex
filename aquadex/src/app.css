@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Base theme (dark) colors as HSL values */
+    --background: 217 100% 9%; /* #00122e */
+    --foreground: 210 40% 98%; /* Light text */
+
+    --card: 217 100% 9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 217 100% 9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%; /* Primary interactive elements, e.g., bright text/icons */
+    --primary-foreground: 217 100% 9%; /* Text on primary elements, e.g., dark text on bright button */
+
+    --secondary: 216 100% 21%; /* #00296b - for gradient end and secondary elements */
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217 29% 17%; /* Muted backgrounds, slightly lighter than base */
+    --muted-foreground: 210 30% 88%; /* Muted text */
+
+    --accent: 210 40% 98%;
+    --accent-foreground: 217 100% 9%;
+
+    --destructive: 0 72% 51%; /* Red for warnings/errors */
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 29% 17%; /* Borders and dividers */
+    --input: 217 29% 17%; /* Input field backgrounds */
+    --ring: 210 40% 98%; /* Focus rings */
+
+    --radius: 0.5rem; /* Default border radius for components */
+  }
+
+  /* If you were to support a light theme, you'd define it here, e.g.: */
+  /*
+  .light {
+    --background: 0 0% 100%;
+    --foreground: 222.2 47.4% 11.2%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 47.4% 11.2%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 47.4% 11.2%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 47.4% 11.2%;
+    --radius: 0.5rem;
+  }
+  */
+
+  html, body {
+    @apply h-full;
+  }
+
+  body {
+    /* Apply the gradient using the CSS variables that Tailwind's bg-background and bg-secondary will pick up */
+    @apply bg-gradient-to-b from-background to-secondary text-foreground;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
