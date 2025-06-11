@@ -219,7 +219,7 @@
 
   <section class="w-full bg-muted/30 p-6 rounded-xl shadow-md">
     <h2 class="text-2xl font-semibold mb-6 text-primary border-b border-border pb-3">Image Gallery (Carousel)</h2>
-    <div class="max-w-3xl mx-auto"> {/* Increased max-width for carousel */}
+    <div class="max-w-3xl mx-auto">
       <Carousel images={sampleImages} id="main-showcase-carousel" />
     </div>
     <div class="max-w-md mx-auto mt-8">
